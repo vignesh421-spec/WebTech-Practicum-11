@@ -1,0 +1,231 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <title>StyleNest - Fashion Store</title> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+ 
+    <style> 
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        } 
+ 
+        body { 
+            font-family: Arial, sans-serif; 
+            background: #f8f5f2; 
+        } 
+ 
+        header { 
+            background: #222; 
+            color: white; 
+            text-align: center; 
+            padding: 20px; 
+        } 
+ 
+        header h1 { 
+            color: #f4b183; 
+        } 
+ 
+        nav { 
+            background: #333; 
+        } 
+ 
+        nav ul { 
+            display: flex; 
+            justify-content: center; 
+            list-style: none; 
+        } 
+ 
+        nav a { 
+            display: block; 
+            color: white; 
+            padding: 15px 25px; 
+            text-decoration: none; 
+        } 
+ 
+        nav a:hover { 
+            background: #f4b183; 
+            color: black; 
+        } 
+ 
+        .container { 
+            max-width: 500px; 
+            margin: 30px auto; 
+            padding: 25px; 
+            background: white; 
+            border-radius: 10px; 
+            box-shadow: 0 2px 8px #ccc; 
+        } 
+ 
+        h2 { 
+            text-align: center; 
+            margin-bottom: 20px; 
+            color: #333; 
+        } 
+ 
+        label { 
+            display: block; 
+            margin-top: 15px; 
+            font-weight: bold; 
+        } 
+ 
+        input { 
+            width: 100%; 
+            padding: 10px; 
+            margin-top: 5px; 
+            border: 1px solid #aaa; 
+            border-radius: 5px; 
+        } 
+ 
+        button { 
+            background: #333; 
+            color: white; 
+            padding: 12px 20px; 
+            border: none; 
+            margin-top: 20px; 
+            cursor: pointer; 
+            border-radius: 5px; 
+        } 
+ 
+        button:hover { 
+            background: #f4b183; 
+            color: black; 
+        } 
+ 
+        #result { 
+            margin-top: 20px; 
+            padding: 10px; 
+            color: green; 
+            font-weight: bold; 
+            white-space: pre-line; 
+        } 
+ 
+        footer { 
+            background: #222; 
+            color: white; 
+            text-align: center; 
+            padding: 15px; 
+            margin-top: 30px; 
+        } 
+ 
+        @media(max-width: 600px) { 
+            nav ul { 
+                flex-direction: column; 
+                text-align: center; 
+            } 
+ 
+            .container { 
+                margin: 20px; 
+                padding: 15px; 
+            } 
+        } 
+    </style> 
+</head> 
+ 
+<body> 
+ 
+    <!-- Header --> 
+    <header> 
+        <h1>StyleNest</h1> 
+        <p>Your Style, Your Choice</p> 
+    </header> 
+ 
+    <!-- Navigation --> 
+    <nav> 
+        <ul> 
+            <li><a href="#">Home</a></li> 
+            <li><a href="#">Men</a></li> 
+            <li><a href="#">Women</a></li> 
+            <li><a href="#">Offers</a></li> 
+            <li><a href="#">Contact</a></li> 
+        </ul> 
+    </nav> 
+ 
+    <!-- Customer Form --> 
+    <div class="container"> 
+ 
+        <h2>Customer Registration Form</h2> 
+ 
+        <label for="customerName">Customer Name:</label> 
+        <input type="text" id="name" placeholder="Enter your name"> 
+ 
+        <label for="mobileNumber">Mobile Number:</label> 
+        <input type="text" id="mobile" 
+        placeholder="Enter 10-digit mobile number" 
+        inputmode="numeric" maxlength="10"> 
+ 
+        <label for="productQuantity">Product Quantity:</label> 
+        <input type="text" id="quantity" 
+        placeholder="Enter quantity" inputmode="numeric"> 
+ 
+        <button type="button" onclick="processForm()"> 
+            Submit 
+        </button> 
+ 
+        <p id="result"></p> 
+ 
+    </div> 
+ 
+    <!-- Footer --> 
+    <footer> 
+        <p>© 2026 StyleNest | Fashion for Everyone</p> 
+    </footer> 
+ 
+    <!-- JavaScript Validation --> 
+    <script> 
+        function processForm() { 
+ 
+            let name = document.getElementById("name").value.trim(); 
+            let mobile = document.getElementById("mobile").value.trim(); 
+            let quantity = document.getElementById("quantity").value.trim(); 
+ 
+            let result = document.getElementById("result"); 
+ 
+            // Check empty fields 
+            if (name === "" || mobile === "" || quantity === "") { 
+                result.style.color = "red"; 
+                result.textContent = "Please fill all the fields."; 
+            } 
+ 
+            // Check mobile number contains only numbers 
+            else if (!/^[0-9]+$/.test(mobile)) { 
+                result.style.color = "red"; 
+                result.textContent = "Mobile number must contain only numbers."; 
+            } 
+ 
+            // Check mobile number length 
+            else if (mobile.length !== 10) { 
+                result.style.color = "red"; 
+                result.textContent = "Mobile number must contain 10 digits."; 
+            } 
+ 
+            // Check quantity contains only numbers 
+            else if (!/^[0-9]+$/.test(quantity)) { 
+                result.style.color = "red"; 
+                result.textContent = "Quantity must contain only numbers."; 
+            } 
+ 
+            // Check quantity is greater than zero 
+            else if (Number(quantity) <= 0) { 
+                result.style.color = "red"; 
+                result.textContent = "Quantity must be greater than zero."; 
+            } 
+ 
+            // Display valid details 
+            else { 
+                result.style.color = "green"; 
+ 
+                result.textContent = 
+                    "Registration Successful!\n" + 
+                    "Customer Name: " + name + "\n" + 
+                    "Mobile Number: " + mobile + "\n" + 
+                    "Product Quantity: " + quantity; 
+            } 
+        } 
+</body> 
+    </script> 
+ 
+</body> 
+</html> 
